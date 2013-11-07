@@ -1,0 +1,28 @@
+# call checkObstacleLFR to get an obstacle array
+# DO NOT call checkObstacle. It's called by checkObstacleLFR
+# put the distance you want as the parameter
+def checkObstacle(thresholdDistance, Direction):
+	if Direction == "Forward":
+		Distance = getObstacle("middle")
+	elif Direction == "Left":
+		turnLeft(0.5,1.5)
+		Distance = getObstacle("middle")
+		turnRight(0.5,1.5)
+	elif Direction == "Right":
+		turnRight(0.5,1.5)
+		Distance = getObstacle("middle")
+		turnLeft(0.5,1.5)
+	else:
+		return 1
+	if Distance < thresholdDistance:
+		return 0
+	else:
+		return 1
+	
+def checkObstacleLFR(thresholdDistance):
+	a = [0,0,0]
+	a[0] = checkObstacle(thresholdDistance,"Left")
+	a[2] = checkObstacle(thresholdDistance,"Right")
+	a[1] = checkObstacle(thresholdDistance,"Forward")
+	return a
+	
